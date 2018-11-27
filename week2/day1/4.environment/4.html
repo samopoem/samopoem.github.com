@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi">
+
+<meta name="apple-mobile-web-app-capable" content="yes" /> 
+<!-- <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> -->
+<link rel="apple-touch-startup-image" href="loading.png" />
+<link rel="apple-touch-icon" href="icon.png" /> 
+
+<title>Environment Test</title>
+<style>
+	ul {
+		font-size: 20px;
+	}
+
+	li {
+		padding: 10px;
+		border: solid 1px;
+	}
+
+	.delegate { 
+		-webkit-tap-highlight-color: rgba(0,0,0,0);  
+	} 
+
+	.delegate .highlight{ 
+		-webkit-tap-highlight-color: rgba(0,0,0,0.25); 
+	} 
+
+</style>
+</head>
+<body>
+	<button name="ADD" id="add" onclick="add();">ADD</button>
+<ul id="parent" class="delegate">
+	<li class="highlight"><a href="4-1.html">test1</a></li>
+	<li class="highlight"><a href="4-1.html">test1</a></li>
+	<li class="highlight"><a href="4-1.html">test1</a></li>
+	<li class="highlight"><a href="4-1.html">test1</a></li>
+</ul>
+<script>
+	function add() {
+		document.querySelector("#parent").innerHTML += "<li>add</li>";
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>network</title>
+<style>
+
+</style>
+</head>
+<body>
+<ul id="connection"></ul>
+<script>
+	var connection = window.navigator.connection || window.navigator.mozConnection || window.navigator.webkitConnection;
+
+	// TODO :
+	// 1. connnection의 속성들을 <ul> 요소에 출력해 봅니다.
+	// 2. change 이벤트를 바인딩해 연결이 변경되었을때 연결 타입을 alert로 출력해 봅니다.
+	for (var x in connection) {
+		if (typeof connection[x] !== "function") {
+			document.querySelector("#connection").innerHTML += "<li>"+ x +": "+ connection[x] +"</li>";
+		}
+	}
+
+	navigator.connection.addEventListener("change", function(e) {
+		alert(e.target.type);
+	});
+</script>
+</body>
+</html>

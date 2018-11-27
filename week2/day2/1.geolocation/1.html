@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>network</title>
+<style>
+	html, body {
+	  height: 100%;
+	  margin: 0;
+	  padding: 0;
+	}
+
+	#map-canvas, #map_canvas {
+	  height: 100%;
+	}
+
+	@media print {
+	  html, body {
+	    height: auto;
+	  }
+
+	  #map-canvas, #map_canvas {
+	    height: 650px;
+	  }
+	}
+
+	#panel {
+	  position: absolute;
+	  top: 5px;
+	  left: 50%;
+	  margin-left: -180px;
+	  z-index: 5;
+	  background-color: #fff;
+	  padding: 5px;
+	  border: 1px solid #999;
+	}
+</style>
+</head>
+<body>
+
+<div id="map-canvas"></div>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script>
+var currentPosition;
+var parliament;
+var marker;
+var map;
+
+function initialize() {
+	var mapOptions = {
+		zoom: 13,
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		center: currentPosition
+	};
+
+	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+	marker = new google.maps.Marker({
+		map:map,
+		draggable:true,
+		animation: google.maps.Animation.DROP,
+		position: parliament
+	});
+
+	google.maps.event.addListener(marker, 'click', toggleBounce);
+}
+
+function toggleBounce() {
+	marker.setAnimation(marker.getAnimation() != null ? null : google.maps.Animation.BOUNCE);
+}
+
+
+// TODO :
+// 1. 현재 위치 정보를 얻는 코드를 작성해 봅니다.
+// 2. 위도와 경도 값을 얻은 후 다음의 코드를 수행합니다.
+// 	currentPosition = new google.maps.LatLng(latitude, longitude);
+//	parliament = new google.maps.LatLng(latitude, longitude);
+//	initialize();
+navigator.geolocation.getCurrentPosition(function(position) {
+	var latitude = position.coords.latitude; // 위도값 찾기	
+	var longitude = position.coords.longitude; // 경도값 찾기
+	var altitude = position.coords.altitude;
+
+	currentPosition = new google.maps.LatLng(latitude, longitude);
+	parliament = new google.maps.LatLng(latitude, longitude);
+
+	initialize();
+});
+</script>
+</body>
+</html>

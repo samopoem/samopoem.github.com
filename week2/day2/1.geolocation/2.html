@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>network</title>
+<style>
+	#touch{
+		width : 600px;
+		height:100px;
+		background-color:green;
+	}
+	#content{
+		width : 300px;
+		background-color:red;
+	}
+	b{
+		color: green;
+	}
+</style>
+</head>
+<body>
+
+<ol id="log"></ol>
+<script>
+function log(txt) {
+	document.querySelector("#log").innerHTML += "<li>"+ txt +"</li>";
+}
+
+var i = 0;
+function successCallback(position) {
+	log("Lat:"+ position.coords.latitude +", Long:"+ position.coords.longitude);
+	i++;
+
+	if(i==10) {
+		navigator.geolocation.clearWatch(watchId);
+		log("<b>end</b>");
+	}
+	
+}
+
+function errCallback(e){
+	alert("check");
+}
+
+var options = {
+	enableHighAccuracy : true,
+	timeout : 2500,
+	maximumAge : 75000
+};
+
+// TODO : watchPosition메서드를 사용해 지속적으로 사용자의 위치를 체크하는 코드를 작성한다.
+// 1. 성공 콜백함수에서는 Latitude와 Longitude 값을 log함수로 전달해 출력한다.
+// 2. 10회 호출되면 중단한다.
+var watchId = navigator.geolocation.watchPosition(
+	successCallback,
+	errCallback,
+	options
+);
+</script>
+</body>
+</html>
